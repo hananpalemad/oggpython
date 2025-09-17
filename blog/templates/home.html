@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Blog</title>
+    <style>
+        /* 🌌 Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 🔹 Navbar */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 🔹 Container */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        /* 🔹 Form */
+        form {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+        input {
+            background: rgba(255, 255, 255, 0.85);
+        }
+        textarea {
+            background: rgba(255, 255, 255, 0.85);
+            resize: none;
+        }
+        button {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 114, 255, 0.6);
+        }
+
+        /* 🔹 Post Cards */
+        .post {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);
+        }
+        .post h3 {
+            margin: 0;
+            color: #fff;
+        }
+        .post p {
+            color: #ddd;
+            margin-top: 8px;
+        }
+        .meta {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        .delete {
+            display: inline-block;
+            margin-top: 8px;
+            color: #ff5f5f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .delete:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty State */
+        .empty {
+            text-align: center;
+            margin-top: 50px;
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>🚀 Future Blog</h1>
+        <a href="{% url 'about' %}">About</a>
+    </div>
+
+    <div class="container">
+        <!-- Post Form -->
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Enter a futuristic title..." required>
+            <textarea name="content" rows="4" placeholder="Share your thoughts with the world..." required></textarea>
+            <button type="submit">Publish ✨</button>
+        </form>
+
+        <!-- Posts -->
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                    <div class="meta">
+                        Posted on {{ post.created_at|date:"M d, Y H:i" }}
+                    </div>
+                    <a class="delete" href="{% url 'delete_post' post.id %}">🗑 Delete</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                ✨ No posts yet — be the first to share your ideas!
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        BE HAPPYYYYY!!!!!
+    </footer>
+
+</body>
+</html>

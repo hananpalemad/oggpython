@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin-top: 50px;
+            box-shadow: 0px 8px 30px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        .instagram {
+            color: #e1306c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .instagram:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <span>ℹ️ About</span>
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+
+    <div class="container">
+        <h2>Welcome to Future Blog</h2>
+        <p>This is an open platform where everyone can share their thoughts, ideas, and creativity </p>
+        <p>For more details: <a class="instagram" href="https://instagram.com/hanan_p_t_" target="_blank">@hanan_p_t_</a></p>
+    </div>
+
+</body>
+</html>
